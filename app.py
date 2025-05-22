@@ -307,6 +307,51 @@ def tracking_main():
             except Exception as e:
                 st.error(f"Entry failed: {str(e)}")
                 st.code(traceback.format_exc())
+    if not st.session_state.sales_data.empty:
+        st.header("📋 Entry Management")
+        st.subheader("Delete Existing Entries")
+        
+        # Create editable DataFrame with checkboxes
+        df = st.session_state.sales_data.copy()
+        df.insert(0, "Select", False)
+        
+        edited_df = st.data_editor(
+            df,
+            hide_index=True,
+            column_config={
+                "Select": st.column_config.CheckboxColumn(
+                    "Delete?",
+                    help="Select entries to delete"
+                ),
+                "Date": st.column_config.DateColumn(
+                    "Date",
+                    format="YYYY-MM-DD",
+                    required=True
+                ),
+                "Total": st.column_config.NumberColumn(
+                    "Total Sales",
+                    format="%d pairs"
+                )
+            },
+            disabled=["Date", "Institution"] + [f"Size_{i}" for i in TRACKING_SIZE_RANGE] + ["Total"],
+            use_container_width=True
+        )
+        
+        if st.button("🗑️ Delete Selected Entries", type="primary"):
+            # Find selected rows
+            selected_indices = edited_df.index[edited_df["Select"]].tolist()
+            
+            if selected_indices:
+                # Filter out selected rows
+                updated_df = st.session_state.sales_data.drop(selected_indices)
+                
+                # Update state and save
+                st.session_state.sales_data = updated_df
+                save_tracking_data(updated_df)
+                st.toast(f"Deleted {len(selected_indices)} entries")
+                st.rerun()
+            else:
+                st.warning("No entries selected for deletion")
 
     # Data display section
     if not st.session_state.sales_data.empty:
