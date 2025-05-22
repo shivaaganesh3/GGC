@@ -1,0 +1,6 @@
+streamlit>=1.26.0
+pandas>=2.0.0
+prophet>=1.1.4
+plotly>=5.15.0
+datetime
+pathlib 
