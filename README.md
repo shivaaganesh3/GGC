@@ -2,10 +2,15 @@
 
 A Streamlit web application for tracking daily shoe sales across multiple institutions and forecasting future sales based on historical data.
 
+## Live Demo
+
+**Live Application:** [https://ggcintern.streamlit.app/](https://ggcintern.streamlit.app/)
+
 ## Features
 
 ### Daily Sales Tracking
 - Record sales data by size (4-15) for different institutions
+- Manage data entries with delete functionality
 - Compare sales data across selected dates
 - Visualize size distribution with interactive charts
 - Auto-calculate total sales
@@ -46,6 +51,16 @@ streamlit run app.py
 Use the sidebar to switch between application modes:
 - **Daily Sales Tracking**: Record and analyze daily sales
 - **Sales Forecasting**: Generate and visualize sales forecasts
+
+### Data Management
+- Record new sales entries using the form interface
+- Delete unwanted entries by selecting them in the data editor
+- Compare historical data with interactive charts
+
+## Deployment
+
+This application is already deployed at [https://ggcintern.streamlit.app/](https://ggcintern.streamlit.app/)
+
 
 ## Technologies Used
 - Streamlit: Web application framework
