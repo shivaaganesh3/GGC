@@ -28,7 +28,7 @@ A Streamlit web application for tracking daily shoe sales across multiple instit
 1. Clone this repository:
 ```
 git clone <repository-url>
-cd hackathon
+
 ```
 
 2. Install required packages:
